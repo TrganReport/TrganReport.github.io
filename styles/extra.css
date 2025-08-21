@@ -98,6 +98,12 @@ ul {
     }
 }
 
+@media screen and (max-width: 76.2344em) {
+    .md-header__button.md-logo {
+        display: inline-block !important;
+    }
+}
+
 .btn-primary {
   background-color: #007bff; /* TrganReport blue */
   color: #fff;
