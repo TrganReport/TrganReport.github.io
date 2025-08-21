@@ -96,12 +96,18 @@ ul {
         height: 2rem;
         width: 2rem;
     }
-}
 
-@media screen and (max-width: 76.2344em) {
     .md-header__button.md-logo {
         display: inline-block !important;
     }
+
+[dir=ltr] .md-header__title
+ {
+    margin-left: 0;}
+label.md-header__button.md-icon[for="__search"] {
+  display: none !important;
+}
+
 }
 
 .btn-primary {
