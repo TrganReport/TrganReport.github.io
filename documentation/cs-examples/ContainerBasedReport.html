@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!--tutorial content start-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <meta name="viewport" content="width=1343">
+  <!--tutorial content end-->
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+    href="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/logo/favicon-16x16.png">
+  <link rel="manifest"
+    href="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/site.webmanifest">
+  <meta name="version" content="1.0.0">
+  <meta name="author" content="Bala">
+  <meta name="license" content="MIT">
+  <meta name="description" content="Enterprise-grade Selenium Html report framework">
+  <meta name="repository" content="https://github.com/Trgan-Reports/">
+  <meta name="framework" content="Trgan Report">
+  <title>Trgan Report</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/style.css">
+</head>
+
+<body>
+  <!--tutorial content start-->
+  <div id="rotateHint" style="display:none; font-size:xx-large; background-color: aquamarine;">
+    🔄 Please rotate your device for optimal viewing
+  </div>
+  <script>
+    function checkOrientation() {
+      if (screen.orientation.type.includes("portrait")) {
+        document.getElementById("rotateHint").style.display = "block";
+      } else {
+        document.getElementById("rotateHint").style.display = "none";
+      }
+    }
+
+    screen.orientation.addEventListener("change", checkOrientation);
+    checkOrientation();
+  </script>
+  <!--tutorial content end-->
+  <script id="screenshot-data" type="application/json">
+ {
+      "end": "end"
+    }
+  </script>
+  <h1>Automation Report</h1>
+  <h2>EXECUTION SUMMARY</h2>
+  <div class="summary-panel">
+    <div class="summary-item total">Total Tests: <span>1</span></div>
+    <div class="summary-item pass">✔ Passed: <span>1</span></div>
+    <div class="summary-item fail">✗ Failed: <span>0</span></div>
+    <div class="summary-item skip">⏭ Skipped: <span>0</span></div>
+    <div class="summary-item duration">⏱ Duration: <span>0h 0m 9s</span></div>
+  </div>
+  <div class="meta-wrapper">
+    <div class="meta-controls" style="top:0px">
+      <button id="chart-toggle" class="toggleFilters" title="Show Charts" onclick="toggleSummaryPanel()">📊</button>
+    </div>
+    <p id="inline-summary" class="meta-info-line"> 🧑 Executed by
+      <strong>Automation Tester</strong> |
+      🛠️ Mode <strong></strong>|
+      🌐 Enivronment <strong> </strong>|
+      📅 Date <strong>21-8-2025 </strong>|
+      🔄 Sprint <strong><!--SPRINT--></strong>
+    </p>
+    <div class="summary-meta" id="summaryPanel" style="display: none;">
+      <div class="layout">
+        <div class="meta-info-out">
+          <p class=meta-info>🧑<strong> Executed by : </strong>Automation Tester </p>
+          <p class=meta-info>📅<strong> Date : </strong>21-8-2025 </p>
+        </div>
+      </div>
+      <div class="layout">
+        <div class="layout" id="chartCarousel">
+          <div class="chart-container" id="chart-slide-0">
+            <canvas id="testSummaryChart" width="460" height="250"></canvas>
+            <div class="chart-title">Execution Overview</div>
+          </div>
+          <div class="chart-container" id="chart-slide-1">
+            <canvas id="testBlockSummaryChart" width="460" height="250"></canvas>
+            <div class="chart-title">Test Overview</div>
+          </div>
+          <div class="chart-container" id="chart-slide-2" style="display: none;">
+            <canvas id="stepSummaryChart" width="460" height="250"></canvas>
+            <div class="chart-title">Steps Overview</div>
+          </div>
+          <div class="chart-dots">
+            <span class="dot active" onclick="showChart(0)"></span>
+            <span class="dot" onclick="showChart(1)"></span>
+            <span class="dot" onclick="showChart(2)"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2>EXECUTION STATUS</h2>
+  <div class="table-wrapper">
+    <div class="table-controls">
+      <button id="toggleFilters" title="Show Filters">🔍</button>
+    </div>
+
+    <table name="status" id="status">
+      <thead>
+        <tr>
+          <th>Test Name</th>
+          <th style="width:100px;">Category</th>
+          <th style="width:110px;">Start Time</th>
+          <th style="width:110px;">End Time</th>
+          <th style="width:70px;">Duration</th>
+          <th style="width:50px;">Status</th>
+        </tr>
+        <tr class="filter-row">
+          <th><input type="text" placeholder="Filter Test Name" /></th>
+          <th><input type="text" placeholder="Filter Category" /></th>
+          <th><input type="text" placeholder="Filter Start Time" /></th>
+          <th><input type="text" placeholder="Filter End Time" /></th>
+          <th><input type="text" placeholder="Filter Duration" /></th>
+          <th><input type="text" placeholder="Filter Status" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> Login Module</td>
+          <td>Regression</td>
+          <td>07:31:39 PM</td>
+          <td>07:31:48 PM</td>
+          <td>0h 0m 9s</td>
+          <td class='pass'>PASS</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>EXECUTION REPORT</h2>
+  <div class="test-block">
+    <div class="test-summary" onclick="toggleSection1(this)">
+      <span class="arrow">▶</span>
+      <img class="icon"
+        src="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/icons/pass.png"
+        alt="pass">
+      <span class="left">Login Module</span>
+    </div>
+    <div class="test-details" name="/*T_NAME*/" style="display: none;">
+      <div class="test-block" name="/*C_NAME*/">
+        <div class="test-summary" onclick="toggleSection1(this)">
+          <span class="arrow">▶</span>
+          <img class="icon"
+            src="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/icons/pass.png"
+            alt="pass">
+          <span class="left">Login in with valid credentials</span>
+        </div>
+        <div class="test-details" name="/*T_NAME*/" style="display: none;">
+          <div class="step">
+            <span class="gherkin">When</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Navigate to app</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+          <div class="step">
+            <span class="gherkin">When</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Enter valid credentials</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+          <div class="step">
+            <span class="gherkin">Then</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Land on main page</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+
+        </div>
+      </div>
+      <div class="test-block" name="/*C_NAME*/">
+        <div class="test-summary" onclick="toggleSection1(this)">
+          <span class="arrow">▶</span>
+          <img class="icon"
+            src="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/icons/pass.png"
+            alt="pass">
+          <span class="left">Login in with invalid credentials</span>
+        </div>
+        <div class="test-details" name="/*T_NAME*/" style="display: none;">
+          <div class="step">
+            <span class="gherkin">Given</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Navigate to app</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+          <div class="step">
+            <span class="gherkin">When</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Enter invalid credentials</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+          <div class="step">
+            <span class="gherkin">Then</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Failed to land on main page</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+
+        </div>
+      </div>
+      <div class="test-block" name="/*C_NAME*/">
+        <div class="test-summary" onclick="toggleSection1(this)">
+          <span class="arrow">▶</span>
+          <img class="icon"
+            src="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/icons/pass.png"
+            alt="pass">
+          <span class="left">Login in with valid username</span>
+        </div>
+        <div class="test-details" name="/*T_NAME*/" style="display: none;">
+          <div class="step">
+            <span class="gherkin">Given</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Navigate to app</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+          <div class="step">
+            <span class="gherkin">When</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Enter valid username and invalid
+              password</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+          <div class="step">
+            <span class="gherkin">Then</span>
+            <span class="description pass" onclick="expandLogs(this.parentElement)">Failed to land on main page</span>
+            <span class="step-arrow" title="see logs">▶</span>
+            <div class="spacer"></div>
+
+            <span class="timestamp">0h 0m 1s</span>
+            <span class="status status-pass-icn">✓</span>
+          </div>
+          <div class="log" style="display:none;">
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://unpkg.com/pako@latest/dist/pako.min.js"></script>
+  <style>
+
+  </style>
+  <script>
+    window.testSummaryData = [
+      { label: 'PASS', count: 1, color: '#2ecc71' },
+      { label: 'Fail', count: 0, color: '#e74c3c' },
+      { label: 'Skip', count: 0, color: '#099bfd' },
+      { label: 'Total', count: 1, color: '#34495e' }
+    ];
+    window.testBlockSummaryData = [
+      { label: 'PASS', count: 3, color: '#2ecc71' },
+      { label: 'Fail', count: 0, color: '#e74c3c' },
+      { label: 'Skip', count: 0, color: '#099bfd' },
+      { label: 'Total', count: 3, color: '#34495e' }
+    ];
+    window.stepSummaryData = [
+      { label: 'PASS', count: 9, color: '#2ecc71' },
+      { label: 'Fail', count: 0, color: '#e74c3c' },
+      { label: 'Skip', count: 0, color: '#099bfd' },
+      { label: 'Total', count: 9, color: '#34495e' }
+    ]; if (!navigator.onLine) {
+      alert('You are offline. Some features may not work.');
+      document.querySelectorAll('.filter-row').forEach(row => {
+        row.style.display = 'none';
+      });
+    }
+  </script>
+  <script
+    src="https://cdn.jsdelivr.net/gh/trgan-reports/trgan-report-cdn@272a54063699859ced0422aa3e0bc33a24446a1a/v1.0/script.js"></script>
+</body>
+
+</html>
